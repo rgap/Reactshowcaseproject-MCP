@@ -1,0 +1,2 @@
+export { TicTacToePage } from "./TicTacToePage";
+

@@ -9,6 +9,13 @@
   "feature-customHooks": "Custom Hooks",
   "feature-localStorage": "localStorage",
   "feature-cssModules": "CSS Modules",
-  "feature-otherFeature": "otherFeature"
+  "feature-otherFeature": "otherFeature",
+  "tictactoe-next-player": "Next player: ",
+  "tictactoe-winner": "Winner: ",
+  "tictactoe-tied-game": "Tied Game",
+  "tictactoe-reset": "Reset",
+  "tictactoe-go-to": "Go to:",
+  "tictactoe-game-start": "Game Start",
+  "tictactoe-move": "Move"
 }
 

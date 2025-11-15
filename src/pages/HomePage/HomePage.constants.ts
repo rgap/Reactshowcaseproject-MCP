@@ -3,6 +3,7 @@ export const PROJECTS = [
     id: "tictactoe",
     titleKey: "project-tictactoe-title",
     image: "/assets/tictactoe.png",
+    link: "/tic-tac-toe",
     features: [
       "feature-useState",
       "feature-useEffect",

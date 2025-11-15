@@ -15,6 +15,7 @@ function HomePage() {
             title={t(project.titleKey)}
             image={project.image}
             features={project.features.map((featureKey) => t(featureKey))}
+            link={project.link}
           />
         ))}
       </div>

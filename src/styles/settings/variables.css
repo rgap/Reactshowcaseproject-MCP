@@ -13,8 +13,12 @@
   --color-blue-50: #eff4ff;
   --color-blue-100: #dbe6fe;
   --color-blue-500: #6090fa;
+  --color-blue-600: #3b76f6;
+  --color-blue-700: #1d58d8;
   --color-error: #ef4444;
+  --color-error-dark: #b91c1c;
   --color-success: #22c55e;
+  --color-green-600: #16a34a;
 
   /* Spacing */
   --space-xs: 0.25rem;
