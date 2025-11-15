@@ -1,31 +1,26 @@
-import { ComponentCard } from "../../components/ComponentCard";
+import { useI18n } from "../../hooks/useI18n";
+import { ComponentCard } from "../../components";
 import { PROJECTS } from "./HomePage.constants";
 import styles from "./HomePage.module.css";
 
 function HomePage() {
-  const handleProjectClick = (projectId: string) => {
-    console.log(`Project clicked: ${projectId}`);
-  };
+  const { t } = useI18n();
 
   return (
-    <main className={styles["home-page"]}>
-      <div className={styles["home-page__container"]}>
-        <div className={styles["home-page__grid"]}>
-          {PROJECTS.map((project) => (
-            <ComponentCard
-              key={project.id}
-              title={project.title}
-              imageUrl={project.imageUrl}
-              features={project.features}
-              onClick={() => handleProjectClick(project.id)}
-            />
-          ))}
-        </div>
+    <div className={styles["home-page"]}>
+      <div className={styles["home-page__content"]}>
+        {PROJECTS.map((project) => (
+          <ComponentCard
+            key={project.id}
+            title={t(project.titleKey)}
+            image={project.image}
+            features={project.features.map((featureKey) => t(featureKey))}
+          />
+        ))}
       </div>
-    </main>
+    </div>
   );
 }
 
 export { HomePage };
-
 

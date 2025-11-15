@@ -1,10 +1,8 @@
 body {
-  font-family: var(--font-family-primary);
+  font-family: var(--font-family-base);
   font-size: var(--font-size-base);
-  font-weight: var(--font-weight-normal);
-  color: var(--color-text-primary);
-  background-color: var(--color-background);
-  line-height: var(--line-height-normal);
+  color: var(--color-primary);
+  background-color: var(--color-gray-50);
 }
 
 h1,
@@ -14,7 +12,7 @@ h4,
 h5,
 h6 {
   font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-tight);
+  line-height: 1.2;
 }
 
 h1 {
@@ -29,8 +27,8 @@ h3 {
   font-size: var(--font-size-xl);
 }
 
-p {
-  line-height: var(--line-height-normal);
+a {
+  color: var(--color-primary);
+  text-decoration: none;
 }
-
 

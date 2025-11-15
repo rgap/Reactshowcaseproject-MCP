@@ -1,16 +1,16 @@
-import { Header } from "./components/Header";
+import { Header } from "./components";
 import { HomePage } from "./pages/HomePage";
+import { I18nProvider } from "./contexts/I18nContext";
 import "./styles/global.css";
 
 function App() {
   return (
-    <div className="app">
+    <I18nProvider>
       <Header />
       <HomePage />
-    </div>
+    </I18nProvider>
   );
 }
 
-export { App };
-
+export default App;
 

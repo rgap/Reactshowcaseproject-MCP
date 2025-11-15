@@ -1,6 +1,5 @@
 export { Header } from "./Header";
-export { LanguagePicker, LANGUAGE } from "./LanguagePicker";
-export { FeatureTag, FEATURE_TAG_SIZE } from "./FeatureTag";
+export { LanguagePicker } from "./LanguagePicker";
+export { FeatureTag } from "./FeatureTag";
 export { ComponentCard } from "./ComponentCard";
-
 

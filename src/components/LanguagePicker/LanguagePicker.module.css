@@ -1,42 +1,44 @@
-/* Block */
 .language-picker {
+  display: grid;
+  grid-template-columns: max-content;
+  grid-template-rows: max-content;
+  position: relative;
+}
+
+.language-picker__button {
+  grid-area: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--language-picker-size);
-  height: var(--language-picker-size);
-  border-radius: var(--border-radius-xl);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--border-radius-full);
   border: 2px solid transparent;
-  background: none;
+  background: transparent;
+  transition: border-color var(--transition-base);
   cursor: pointer;
-  transition: all var(--transition-base);
 }
 
-/* Elements */
+.language-picker__button:hover {
+  border-color: var(--color-blue-500);
+}
+
+.language-picker__button--active {
+  border-color: var(--color-blue-500);
+}
+
+.language-picker__button:first-child {
+  margin-left: 0;
+}
+
+.language-picker__button:nth-child(2) {
+  margin-left: 44px;
+}
+
 .language-picker__flag {
-  width: var(--flag-size);
-  height: var(--flag-size);
+  width: 24px;
+  height: 24px;
   object-fit: cover;
   border-radius: 50%;
 }
-
-/* Modifiers - States */
-.language-picker--active {
-  border-color: var(--color-blue-400);
-}
-
-/* Pseudo-classes */
-.language-picker:hover {
-  transform: scale(1.05);
-}
-
-.language-picker:active {
-  transform: scale(0.95);
-}
-
-.language-picker:focus {
-  outline: 2px solid var(--color-blue-400);
-  outline-offset: 2px;
-}
-
 

@@ -1,37 +1,19 @@
-/* Block */
 .feature-tag {
   display: flex;
   align-items: center;
-  justify-content: center;
   padding: var(--space-xs) var(--space-sm);
-  background-color: var(--color-tag-bg);
-  border: 1px solid var(--color-border-light);
-  border-radius: var(--border-radius-md);
-  transition: all var(--transition-base);
+  background-color: var(--color-blue-50);
+  border: 1px solid var(--color-blue-100);
+  border-radius: 11px;
+  box-sizing: border-box;
 }
 
-/* Elements */
 .feature-tag__text {
+  font-family: var(--font-family-base);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-normal);
-  color: var(--color-text-primary);
-  line-height: 1;
+  line-height: 14px;
+  color: var(--color-slate-900);
   white-space: nowrap;
 }
-
-/* Modifiers - Sizes */
-.feature-tag--small .feature-tag__text {
-  font-size: var(--font-size-xs);
-}
-
-.feature-tag--medium .feature-tag__text {
-  font-size: var(--font-size-sm);
-}
-
-/* Hover state */
-.feature-tag:hover {
-  background-color: var(--color-blue-100);
-  transform: translateY(-1px);
-}
-
 

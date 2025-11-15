@@ -1,0 +1,14 @@
+{
+  "app-title": "Vitrina React",
+  "project-tictactoe-title": "ReactDev Tic-Tac-Toe",
+  "project-poke-title": "Colección Poke",
+  "project-wordle-title": "React Wordle",
+  "project-video-title": "Feed de Videos",
+  "feature-useState": "useState",
+  "feature-useEffect": "useEffect",
+  "feature-customHooks": "Hooks Personalizados",
+  "feature-localStorage": "localStorage",
+  "feature-cssModules": "Módulos CSS",
+  "feature-otherFeature": "otraCaracterística"
+}
+

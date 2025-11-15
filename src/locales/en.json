@@ -1,0 +1,14 @@
+{
+  "app-title": "React Showcase",
+  "project-tictactoe-title": "ReactDev Tic-Tac-Toe",
+  "project-poke-title": "Poke Collection",
+  "project-wordle-title": "React Wordle",
+  "project-video-title": "Video Feed",
+  "feature-useState": "useState",
+  "feature-useEffect": "useEffect",
+  "feature-customHooks": "Custom Hooks",
+  "feature-localStorage": "localStorage",
+  "feature-cssModules": "CSS Modules",
+  "feature-otherFeature": "otherFeature"
+}
+

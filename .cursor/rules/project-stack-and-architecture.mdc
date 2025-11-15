@@ -4,6 +4,14 @@ alwaysApply: true
 
 # Cursor Rules - React + TypeScript + CSS Modules + ITCSS + BEM
 
+## Functional Requirements & Specs
+
+- The full functional specification lives in `docs/functional-requirements.md`.
+- When creating or modifying pages, components, routes, or copy:
+  - **Follow the behaviors and flows defined in that file**.
+  - **Do not invent new features, pages, or states** that are not in the spec or Figma.
+- If an instruction in a prompt conflicts with `docs/functional-requirements.md`, **prefer the functional requirements file**.
+
 ## Tech Stack
 
 - React 18+ (Functional components only)

@@ -3,26 +3,19 @@ import styles from "./ComponentCard.module.css";
 
 interface IComponentCard {
   title: string;
-  imageUrl: string;
+  image: string;
   features: string[];
-  onClick?: () => void;
 }
 
-function ComponentCard({ title, imageUrl, features, onClick }: IComponentCard) {
+function ComponentCard({ title, image, features }: IComponentCard) {
   return (
-    <div className={styles["component-card"]} onClick={onClick}>
-      <div className={styles["component-card__image-wrapper"]}>
-        <img 
-          src={imageUrl} 
-          alt={title}
-          className={styles["component-card__image"]}
-        />
-      </div>
+    <div className={styles["component-card"]}>
+      <img src={image} alt={title} className={styles["component-card__image"]} />
       <div className={styles["component-card__content"]}>
         <h3 className={styles["component-card__title"]}>{title}</h3>
         <div className={styles["component-card__features"]}>
-          {features.map((feature, index) => (
-            <FeatureTag key={`${feature}-${index}`} label={feature} />
+          {features.map((feature) => (
+            <FeatureTag key={feature}>{feature}</FeatureTag>
           ))}
         </div>
       </div>
@@ -31,5 +24,4 @@ function ComponentCard({ title, imageUrl, features, onClick }: IComponentCard) {
 }
 
 export { ComponentCard };
-
 

@@ -1,24 +1,16 @@
-import { FEATURE_TAG_SIZE, type FeatureTagSizeType } from "./FeatureTag.constants";
 import styles from "./FeatureTag.module.css";
 
 interface IFeatureTag {
-  label: string;
-  size?: FeatureTagSizeType;
+  children: string;
 }
 
-function FeatureTag({ label, size = FEATURE_TAG_SIZE.MEDIUM }: IFeatureTag) {
-  const tagClasses = [
-    styles["feature-tag"],
-    styles[`feature-tag--${size}`]
-  ].filter(Boolean).join(" ");
-
+function FeatureTag({ children }: IFeatureTag) {
   return (
-    <div className={tagClasses}>
-      <span className={styles["feature-tag__text"]}>{label}</span>
+    <div className={styles["feature-tag"]}>
+      <p className={styles["feature-tag__text"]}>{children}</p>
     </div>
   );
 }
 
 export { FeatureTag };
-
 

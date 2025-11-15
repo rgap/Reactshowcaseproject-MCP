@@ -1,15 +1,13 @@
-/* Block */
 .header {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: var(--header-height);
-  background-color: var(--color-header-bg);
-  flex-shrink: 0;
+  height: 64px;
+  background-color: var(--color-blue-50);
+  overflow: hidden;
 }
 
-/* Elements */
 .header__container {
   display: flex;
   align-items: center;
@@ -22,18 +20,11 @@
 }
 
 .header__title {
+  font-family: var(--font-family-base);
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
+  line-height: 40px;
   color: var(--color-slate-900);
-  line-height: 2.5rem;
-  white-space: nowrap;
+  white-space: pre;
 }
-
-.header__language-group {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-  position: relative;
-}
-
 

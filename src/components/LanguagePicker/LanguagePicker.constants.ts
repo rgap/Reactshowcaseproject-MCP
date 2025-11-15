@@ -3,6 +3,5 @@ export const LANGUAGE = {
   ES: "es",
 } as const;
 
-export type LanguageType = typeof LANGUAGE[keyof typeof LANGUAGE];
-
+export type LanguageType = (typeof LANGUAGE)[keyof typeof LANGUAGE];
 
