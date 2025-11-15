@@ -1,0 +1,48 @@
+/* Block */
+.home-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: calc(100vh - var(--header-height));
+}
+
+/* Elements */
+.home-page__container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  max-width: var(--max-width-container);
+  padding: var(--space-3xl) var(--space-md);
+  box-sizing: border-box;
+}
+
+.home-page__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xl);
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .home-page__grid {
+    gap: var(--space-lg);
+  }
+}
+
+@media (max-width: 768px) {
+  .home-page__container {
+    padding: var(--space-2xl) var(--space-md);
+  }
+  
+  .home-page__grid {
+    gap: var(--space-md);
+  }
+}
+
+

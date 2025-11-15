@@ -1,0 +1,42 @@
+/* Block */
+.language-picker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--language-picker-size);
+  height: var(--language-picker-size);
+  border-radius: var(--border-radius-xl);
+  border: 2px solid transparent;
+  background: none;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+/* Elements */
+.language-picker__flag {
+  width: var(--flag-size);
+  height: var(--flag-size);
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Modifiers - States */
+.language-picker--active {
+  border-color: var(--color-blue-400);
+}
+
+/* Pseudo-classes */
+.language-picker:hover {
+  transform: scale(1.05);
+}
+
+.language-picker:active {
+  transform: scale(0.95);
+}
+
+.language-picker:focus {
+  outline: 2px solid var(--color-blue-400);
+  outline-offset: 2px;
+}
+
+
