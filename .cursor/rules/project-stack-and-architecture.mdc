@@ -660,6 +660,7 @@ import styles from "./Component.module.css";
 - Single responsibility per component
 - No `console.log` in production
 - Prefer CSS transitions/animations over JS
+- Make it responsive
 
 ## CSS Organization in Components (BEM)
 

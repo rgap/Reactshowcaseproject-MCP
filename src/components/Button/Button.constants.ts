@@ -1,7 +1,6 @@
 export const INTENT = {
   PRIMARY: "primary",
   SECONDARY: "secondary",
-  DANGER: "danger",
 } as const;
 
 export const SIZE = {

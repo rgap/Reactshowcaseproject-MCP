@@ -1,133 +1,115 @@
-import { useState, useEffect } from "react";
-import { Header } from "../../components/Header";
-import { Board } from "../../components/Board";
-import { Button, INTENT } from "../../components/Button";
-import { useI18n } from "../../hooks/useI18n";
-import {
-  Board as BoardType,
-  calculateWinner,
-  isBoardFull,
-} from "../../utils/tictactoe";
+import { useContext } from "react";
+import { I18nContext } from "../../contexts";
+import { Board, LanguagePicker, Breadcrumb } from "../../components";
+import { useTicTacToe } from "../../hooks/useTicTacToe";
 import styles from "./TicTacToePage.module.css";
-
-interface GameHistory {
-  squares: BoardType;
-}
-
-const STORAGE_KEY = "tictactoe-game-state";
+import { cx } from "../../utils/cx";
 
 function TicTacToePage() {
-  const { t } = useI18n();
-  const [history, setHistory] = useState<GameHistory[]>([
-    { squares: Array(9).fill(null) },
-  ]);
-  const [currentMove, setCurrentMove] = useState(0);
-  const xIsNext = currentMove % 2 === 0;
-  const currentSquares = history[currentMove].squares;
-  const { winner, line: winningLine } = calculateWinner(currentSquares);
-  const isTied = !winner && isBoardFull(currentSquares);
-
-  // Load game state from localStorage on mount
-  useEffect(() => {
-    const savedState = localStorage.getItem(STORAGE_KEY);
-    if (savedState) {
-      try {
-        const { history: savedHistory, currentMove: savedMove } =
-          JSON.parse(savedState);
-        setHistory(savedHistory);
-        setCurrentMove(savedMove);
-      } catch (error) {
-        // If parsing fails, start with fresh game
-      }
-    }
-  }, []);
-
-  // Save game state to localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify({ history, currentMove })
-    );
-  }, [history, currentMove]);
-
-  const handlePlay = (nextSquares: BoardType) => {
-    const nextHistory = [...history.slice(0, currentMove + 1), { squares: nextSquares }];
-    setHistory(nextHistory);
-    setCurrentMove(nextHistory.length - 1);
-  };
-
-  const handleSquareClick = (index: number) => {
-    if (currentSquares[index] || winner) {
-      return;
-    }
-    const nextSquares = currentSquares.slice();
-    nextSquares[index] = xIsNext ? "X" : "O";
-    handlePlay(nextSquares);
-  };
-
-  const jumpTo = (move: number) => {
-    setCurrentMove(move);
-  };
-
-  const handleReset = () => {
-    setHistory([{ squares: Array(9).fill(null) }]);
-    setCurrentMove(0);
-  };
+  const { t } = useContext(I18nContext);
+  const {
+    currentSquares,
+    xIsNext,
+    winner,
+    winningLine,
+    isDraw,
+    history,
+    currentMove,
+    handlePlay,
+    jumpTo,
+    resetGame,
+  } = useTicTacToe();
 
   const getStatus = () => {
     if (winner) {
-      return `${t("tictactoe-winner")}${winner}`;
+      return `${t("tictactoe-winner")}: ${winner}`;
     }
-    if (isTied) {
+    if (isDraw) {
       return t("tictactoe-tied-game");
     }
-    return `${t("tictactoe-next-player")}${xIsNext ? "X" : "O"}`;
+    return `${t("tictactoe-next-player")}: ${xIsNext ? "X" : "O"}`;
   };
 
+  const moves = history.map((_, move) => {
+    const description =
+      move === 0
+        ? t("tictactoe-game-start")
+        : `${t("tictactoe-move")} ${move}`;
+
+    // Only render if it's within the history
+    if (move <= currentMove) {
+      return (
+        <button
+          key={move}
+          className={styles["tictactoe__history-button"]}
+          onClick={() => jumpTo(move)}
+        >
+          {description}
+        </button>
+      );
+    }
+
+    // Render placeholder for empty slots
+    return (
+      <div
+        key={move}
+        className={cx(
+          styles["tictactoe__history-button"],
+          styles["tictactoe__history-button--empty"]
+        )}
+      />
+    );
+  });
+
+  // Fill remaining slots to always show 10 buttons (0-9)
+  while (moves.length < 10) {
+    moves.push(
+      <div
+        key={moves.length}
+        className={cx(
+          styles["tictactoe__history-button"],
+          styles["tictactoe__history-button--empty"]
+        )}
+      />
+    );
+  }
+
   return (
-    <div className={styles["tictactoe-page"]}>
-      <Header showBadge badgeText={t("tictactoe-title")} />
-      <main className={styles["tictactoe-page__content"]}>
-        <div className={styles["tictactoe-page__container"]}>
-          <div className={styles["tictactoe-page__game-container"]}>
-            <div className={styles["tictactoe-page__game-area"]}>
-              <div className={styles["tictactoe-page__board-section"]}>
-                <p className={styles["tictactoe-page__status"]}>
-                  {getStatus()}
-                </p>
-                <Board
-                  squares={currentSquares}
-                  winningLine={winningLine}
-                  onSquareClick={handleSquareClick}
-                  disabled={!!winner || isTied}
-                />
+    <div className={styles.tictactoe}>
+      <header className={styles.tictactoe__header}>
+        <div className={styles["tictactoe__header-container"]}>
+          <h1 className={styles.tictactoe__title}>{t("app-title")}</h1>
+          <Breadcrumb>{t("project-tictactoe")}</Breadcrumb>
+          <LanguagePicker />
+        </div>
+      </header>
+      <main className={styles.tictactoe__main}>
+        <div className={styles.tictactoe__content}>
+          <div className={styles["tictactoe__game-card"]}>
+            <div className={styles["tictactoe__game-container"]}>
+              <div className={styles["tictactoe__board-section"]}>
+                <div className={styles.tictactoe__status}>{getStatus()}</div>
+                <div className={styles["tictactoe__board-wrapper"]}>
+                  <Board
+                    squares={currentSquares}
+                    onPlay={handlePlay}
+                    xIsNext={xIsNext}
+                    winningLine={winningLine}
+                    disabled={!!winner || isDraw}
+                  />
+                </div>
               </div>
-              <div className={styles["tictactoe-page__history-section"]}>
-                <Button
-                  onClick={handleReset}
-                  intent={INTENT.DANGER}
-                  className={styles["tictactoe-page__reset-button"]}
+              <div className={styles["tictactoe__history-section"]}>
+                <button
+                  className={styles["tictactoe__reset-button"]}
+                  onClick={resetGame}
                 >
                   {t("tictactoe-reset")}
-                </Button>
-                <p className={styles["tictactoe-page__history-title"]}>
-                  {t("tictactoe-go-to")}
-                </p>
-                <div className={styles["tictactoe-page__history-moves"]}>
-                  {history.map((_, move) => (
-                    <Button
-                      key={move}
-                      onClick={() => jumpTo(move)}
-                      intent={INTENT.PRIMARY}
-                      className={styles["tictactoe-page__move-button"]}
-                      disabled={move > currentMove}
-                    >
-                      {move === 0
-                        ? t("tictactoe-game-start")
-                        : `${t("tictactoe-move")} ${move}`}
-                    </Button>
-                  ))}
-                </div>
+                </button>
+                <h2 className={styles["tictactoe__history-title"]}>
+                  {t("tictactoe-goto")}
+                </h2>
+                <div className={styles["tictactoe__history-list"]}>{moves}</div>
               </div>
             </div>
           </div>
@@ -138,3 +120,4 @@ function TicTacToePage() {
 }
 
 export { TicTacToePage };
+

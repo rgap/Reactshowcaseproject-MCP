@@ -1,5 +1,5 @@
 :root {
-  /* Colors - From Figma design */
+  /* Colors - From Figma Design */
   --color-primary: #0f172a;
   --color-secondary: #71717a;
   --color-white: #ffffff;
@@ -8,20 +8,45 @@
   --color-gray-100: #f4f4f5;
   --color-gray-200: #e4e4e7;
   --color-gray-300: #cbd5e1;
+  --color-gray-400: #94a3b8;
   --color-gray-500: #64748b;
+  --color-gray-600: #475569;
+  --color-gray-700: #334155;
+  --color-gray-divider: #e0e0e0;
   --color-error: #ef4444;
   --color-success: #22c55e;
 
-  /* Design specific colors */
+  /* Brand Colors */
   --color-blue-50: #eff4ff;
   --color-blue-100: #dbe6fe;
-  --color-blue-400: #3b76f6;
-  --color-blue-500: #6090fa;
+  --color-blue-400: #6090fa;
+  --color-blue-500: #3b76f6;
   --color-blue-600: #1d58d8;
 
-  /* Game colors */
+  /* Game Colors */
   --color-green-600: #16a34a;
   --color-red-700: #b91c1c;
+
+  /* Pokemon Type Colors */
+  --type-normal: #a8a878;
+  --type-fighting: #c03028;
+  --type-flying: #a890f0;
+  --type-poison: #a43e9e;
+  --type-ground: #e0c068;
+  --type-rock: #b8a038;
+  --type-bug: #a8b820;
+  --type-ghost: #705898;
+  --type-steel: #b8b8d0;
+  --type-fire: #f57d31;
+  --type-water: #6493eb;
+  --type-grass: #74cb48;
+  --type-electric: #f9cf30;
+  --type-psychic: #f85888;
+  --type-ice: #98d8d8;
+  --type-dragon: #7038f8;
+  --type-dark: #705848;
+  --type-fairy: #ee99ac;
+  --type-unknown: #68a090;
 
   /* Spacing */
   --space-xs: 0.25rem; /* 4px */
@@ -42,6 +67,7 @@
   --font-size-xl: 1.25rem; /* 20px */
   --font-size-2xl: 1.5rem; /* 24px */
   --font-size-3xl: 2.25rem; /* 36px */
+  --font-size-4xl: 3rem; /* 48px */
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-bold: 700;
@@ -59,13 +85,6 @@
   /* Container */
   --container-max-width: 1280px;
 
-  /* Header */
-  --header-height: 64px;
-
-  /* Card */
-  --card-width: 320px;
-  --card-image-height: 220px;
-
   /* Transitions */
   --transition-fast: 150ms ease;
   --transition-base: 200ms ease;
@@ -78,5 +97,5 @@
 
   /* Borders */
   --border-width: 1px;
-  --border-width-thick: 2px;
+  --border-width-2: 2px;
 }

@@ -1,12 +1,12 @@
-import { cx } from "../../utils/cx";
-import { INTENT, IntentType, SIZE, SizeType } from "./Button.constants";
+import { INTENT, SIZE } from "./Button.constants";
+import type { IntentType, SizeType } from "./Button.constants";
 import styles from "./Button.module.css";
+import { cx } from "../../utils/cx";
 
 interface IButton extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   intent?: IntentType;
   size?: SizeType;
   disabled?: boolean;
-  fullWidth?: boolean;
   icon?: React.ReactNode;
   children?: React.ReactNode;
 }
@@ -15,7 +15,6 @@ function Button({
   intent = INTENT.PRIMARY,
   size = SIZE.MEDIUM,
   disabled = false,
-  fullWidth = false,
   icon,
   children,
   className = "",
@@ -26,7 +25,6 @@ function Button({
     styles[`button--${intent}`],
     styles[`button--${size}`],
     disabled && styles["button--disabled"],
-    fullWidth && styles["button--full-width"],
     className
   );
 
@@ -39,3 +37,4 @@ function Button({
 }
 
 export { Button };
+

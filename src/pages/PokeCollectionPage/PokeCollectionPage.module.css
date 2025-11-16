@@ -1,139 +1,377 @@
-/* Login Screen */
-.poke-collection-login {
+/* Block */
+.poke {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--color-gray-50);
+}
+
+/* Header Elements */
+.poke__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 64px;
+  background-color: var(--color-blue-50);
+  border-bottom: var(--border-width) solid var(--color-blue-100);
+}
+
+.poke__header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--container-max-width);
+  padding: 0 var(--space-md);
+}
+
+.poke__title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  line-height: 40px;
+  margin: 0;
+}
+
+/* Main Content */
+.poke__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.poke__content {
+  flex: 1;
+  display: flex;
+  gap: var(--space-xl);
+  align-items: flex-start;
+  max-width: var(--container-max-width);
+  width: 100%;
+  min-height: 720px;
+  padding: var(--space-3xl) var(--space-md);
+}
+
+/* Login Card */
+.poke__login-card {
+  flex: 1;
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-xl);
+  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -2px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  padding: var(--space-xl);
-  background-color: var(--color-gray-50);
+  min-height: 720px;
 }
 
-.poke-collection-login__container {
+.poke__login-logo {
+  width: 320px;
+  height: 160px;
+  margin-bottom: var(--space-xl);
+}
+
+.poke__login-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 179px;
+}
+
+.poke__login-button {
+  width: 100%;
+  padding: var(--space-xs) var(--space-sm);
+  background-color: var(--color-blue-500);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  transition: opacity var(--transition-base);
+}
+
+.poke__login-button:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.poke__login-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.poke__error {
+  color: var(--color-error);
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-xs);
+  text-align: center;
+}
+
+/* Main Card */
+.poke__main-card {
+  flex: 1;
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-xl);
+  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: var(--space-md);
+  min-height: 720px;
+}
+
+/* Search Section */
+.poke__search-section {
   display: flex;
   flex-direction: column;
   gap: var(--space-xl);
-  align-items: center;
-  max-width: 400px;
-  width: 100%;
+  padding: var(--space-md) 0;
 }
 
-.poke-collection-login__title {
-  font-family: var(--font-family-mono);
-  font-size: 48px;
-  font-weight: var(--font-weight-normal);
-  line-height: 56px;
-  color: var(--color-blue-400);
-  text-align: center;
-  margin: 0;
+.poke__search-form {
+  display: flex;
+  gap: var(--space-xs);
 }
 
-.poke-collection-login__form {
+.poke__search-input {
+  width: 180px;
+}
+
+.poke__search-button {
+  padding: var(--space-xs) var(--space-sm);
+  background-color: var(--color-blue-500);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  transition: opacity var(--transition-base);
+}
+
+.poke__search-button:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.poke__search-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Pokemon Detail */
+.poke__pokemon-detail {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
-  width: 100%;
+  align-items: center;
+  padding: var(--space-sm);
+  border-radius: var(--border-radius-lg);
 }
 
-/* Main Screen */
-.poke-collection {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: var(--color-gray-50);
-}
-
-.poke-collection__main {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2xl);
-  padding: var(--space-2xl);
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-}
-
-.poke-collection__section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
-  width: 100%;
-}
-
-.poke-collection__title {
-  font-family: var(--font-family-base);
+.poke__pokemon-name {
   font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-bold);
-  line-height: 32px;
   color: var(--color-primary);
-  margin: 0;
-}
-
-.poke-collection__search-form {
-  display: flex;
-  gap: var(--space-md);
-  align-items: flex-start;
-  width: 100%;
-}
-
-.poke-collection__search-input {
-  flex: 1;
-}
-
-.poke-collection__pokemon-display {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 400px;
-  width: 100%;
-}
-
-.poke-collection__message {
-  font-family: var(--font-family-base);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-normal);
-  color: var(--color-gray-500);
+  line-height: 32px;
   text-align: center;
-  margin: 0;
+  text-transform: capitalize;
+  max-width: 197px;
 }
 
-.poke-collection__favorites {
+.poke__pokemon-id {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  line-height: 20px;
+}
+
+.poke__pokemon-image {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+}
+
+.poke__pokemon-types {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: center;
+}
+
+.poke__pokemon-stats {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.poke__stat {
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
-  width: 100%;
-}
-
-.poke-collection__favorites-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: var(--space-md);
-  width: 100%;
-}
-
-.poke-collection__favorites-empty {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  min-height: 200px;
-  width: 100%;
+  width: 64px;
 }
 
-.poke-collection__exit-button {
-  align-self: flex-start;
+.poke__stat-value {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+  padding: var(--space-sm) 0;
 }
 
-@media (max-width: 768px) {
-  .poke-collection__main {
-    padding: var(--space-lg);
-  }
+.poke__stat-icon {
+  width: 16px;
+  height: 16px;
+}
 
-  .poke-collection__search-form {
-    flex-direction: column;
-  }
+.poke__stat-text {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-primary);
+  line-height: 16px;
+}
 
-  .poke-collection-login__title {
-    font-size: 36px;
-    line-height: 44px;
-  }
+.poke__stat-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-gray-500);
+  line-height: 16px;
+  text-align: center;
+}
+
+.poke__stat-divider {
+  width: 1px;
+  background-color: var(--color-gray-divider);
+  align-self: stretch;
+}
+
+.poke__favorite-button {
+  display: flex;
+  gap: var(--space-xs);
+  align-items: center;
+  padding: var(--space-xs) var(--space-sm);
+  background-color: transparent;
+  color: var(--color-blue-500);
+  border: var(--border-width) solid var(--color-blue-500);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.poke__favorite-button:hover:not(:disabled) {
+  background-color: var(--color-blue-50);
+}
+
+.poke__favorite-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.poke__favorite-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Favorites Sidebar */
+.poke__favorites-sidebar {
+  flex: 1;
+  background-color: var(--color-gray-50);
+  border-radius: var(--border-radius-lg);
+  position: relative;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.poke__favorites-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md);
+  position: relative;
+}
+
+.poke__favorites-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  line-height: 32px;
+}
+
+.poke__exit-button {
+  padding: var(--space-xs) var(--space-sm);
+  background-color: transparent;
+  color: var(--color-blue-500);
+  border: var(--border-width) solid var(--color-blue-500);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  position: absolute;
+  right: var(--space-md);
+  top: var(--space-md);
+}
+
+.poke__exit-button:hover {
+  background-color: var(--color-blue-50);
+}
+
+.poke__favorites-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  padding-top: var(--space-3xl);
+}
+
+.poke__favorite-card {
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  align-items: center;
+  min-width: 140px;
+  cursor: pointer;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.poke__favorite-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.poke__favorite-name {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  line-height: 28px;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.poke__favorite-id {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  line-height: 20px;
+}
+
+.poke__favorite-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.poke__empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--color-gray-500);
+  font-size: var(--font-size-base);
+  padding: var(--space-xl);
 }

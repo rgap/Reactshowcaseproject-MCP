@@ -1,40 +1,25 @@
-import { SquareValue } from "../../utils/tictactoe";
-import { cx } from "../../utils/cx";
 import styles from "./Square.module.css";
+import { cx } from "../../utils/cx";
+import type { Square as SquareValue } from "../../utils/tictactoe";
 
 interface ISquare {
   value: SquareValue;
-  onClick: () => void;
-  isWinning?: boolean;
+  onSquareClick: () => void;
+  isWinner?: boolean;
   disabled?: boolean;
 }
 
-function Square({ value, onClick, isWinning = false, disabled = false }: ISquare) {
-  const handleClick = () => {
-    if (!disabled && !value) {
-      onClick();
-    }
-  };
+function Square({ value, onSquareClick, isWinner = false, disabled = false }: ISquare) {
+  const squareClasses = cx(
+    styles.square,
+    isWinner && styles["square--winner"],
+    disabled && styles["square--disabled"]
+  );
 
   return (
-    <div
-      className={cx(
-        styles.square,
-        (disabled || value) && styles["square--disabled"]
-      )}
-      onClick={handleClick}
-    >
-      {value && (
-        <p
-          className={cx(
-            styles.square__value,
-            isWinning && styles["square__value--winning"]
-          )}
-        >
-          {value}
-        </p>
-      )}
-    </div>
+    <button className={squareClasses} onClick={onSquareClick} disabled={disabled}>
+      {value}
+    </button>
   );
 }
 

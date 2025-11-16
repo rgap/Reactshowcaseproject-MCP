@@ -1,0 +1,20 @@
+/* Block */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-sm) var(--space-md);
+  border: var(--border-width) solid var(--color-blue-600);
+  border-radius: var(--border-radius-xl);
+  background-color: transparent;
+}
+
+/* Elements */
+.breadcrumb__text {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-blue-600);
+  line-height: 24px;
+  white-space: nowrap;
+}
+

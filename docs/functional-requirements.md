@@ -84,9 +84,7 @@ El proyecto debe reflejar el diseño en Figma y contar con las siguientes funcio
 
 La pantalla inicial del proyecto debe mostrar un formulario para que el usuario ingrese un username (cualquiera) y pueda vincular la colección de Pokemones a ese nombre de usuario.
 
-Cuando se ingresa un nombre de usuario que NO existe segun GET favorites del API, debe mostrar un error de usuario no encontrado y no ingresar a las siguientes vistas.
-
-Cuando se ingresa un nombre de usuario que existe segun GET favorites del API, se deberá mostrar la siguiente vista con el buscador de Pokemones y la lista de favoritos.
+Cuando se ingresa un nombre de usuario, se deberá mostrar la siguiente vista con el buscador de Pokemones y la lista de favoritos.
 
 ### Buscador de Pokemones
 
@@ -107,10 +105,10 @@ Para gestionar la lista de Pokemones favoritos de un usuario en particular, se u
 
 ```
 Método	Endpoint	Descripción
-GET	/api/diegotc86/favorites	Retorna la lista de Pokemones favoritos del usuario diegotc86
-POST	/api/diegotc86/favorites	Agrega un Pokemon a la lista de favoritos del usuario diegotc86
-DELETE	/api/diegotc86/favorites/[id]	Elimina el Pokemon con id [id] de la lista de favoritos del usuario diegotc86
-POST	/api/diegotc86/reset	Resetea la lista de favoritos del usuario diegotc86
+GET	/api/[username]/favorites	Retorna la lista de Pokemones favoritos del usuario [username]
+POST	/api/[username]/favorites	Agrega un Pokemon a la lista de favoritos del usuario [username]
+DELETE	/api/[username]/favorites/[id]	Elimina el Pokemon con id [id] de la lista de favoritos del usuario [username]
+POST	/api/[username]/reset	Resetea la lista de favoritos del usuario [username]
 ```
 
 Podrás encontrar un archivo llamado insomnia.json en el repositorio base que podrás importar en Insomnia a fin de hacer pruebas a la API.

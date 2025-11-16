@@ -3,7 +3,6 @@ export interface Pokemon {
   name: string;
   height: number;
   weight: number;
-  types: Array<{ type: { name: string } }>;
   sprites: {
     other: {
       "official-artwork": {
@@ -11,5 +10,46 @@ export interface Pokemon {
       };
     };
   };
+  types: Array<{
+    type: {
+      name: string;
+    };
+  }>;
 }
 
+export interface FavoritePokemon {
+  id: number;
+  pokemonId: number;
+  name: string;
+  imageUrl: string;
+  types: string[];
+}
+
+export interface FavoriteResponse {
+  id: number;
+  pokemonId: number;
+  name: string;
+  imageUrl: string;
+  types: string[];
+}
+
+export type PokemonType =
+  | "normal"
+  | "fighting"
+  | "flying"
+  | "poison"
+  | "ground"
+  | "rock"
+  | "bug"
+  | "ghost"
+  | "steel"
+  | "fire"
+  | "water"
+  | "grass"
+  | "electric"
+  | "psychic"
+  | "ice"
+  | "dragon"
+  | "dark"
+  | "fairy"
+  | "unknown";

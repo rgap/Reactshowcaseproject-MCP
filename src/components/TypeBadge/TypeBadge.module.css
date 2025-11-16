@@ -1,0 +1,15 @@
+/* Block */
+.type-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px var(--space-sm);
+  border-radius: 10px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-white);
+  line-height: 16px;
+  white-space: nowrap;
+  text-transform: capitalize;
+}
+

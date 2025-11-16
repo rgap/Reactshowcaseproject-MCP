@@ -1,108 +1,167 @@
-.tictactoe-page {
+/* Block */
+.tictactoe {
   display: flex;
   flex-direction: column;
-  width: 100%;
   min-height: 100vh;
+  width: 100%;
+  background-color: var(--color-gray-50);
 }
 
-.tictactoe-page__content {
+/* Elements */
+.tictactoe__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 64px;
+  background-color: var(--color-blue-50);
+  border-bottom: var(--border-width) solid var(--color-blue-100);
+}
+
+.tictactoe__header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--container-max-width);
+  padding: 0 var(--space-md);
+}
+
+.tictactoe__title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  line-height: 40px;
+  margin: 0;
+}
+
+.tictactoe__main {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
   align-items: center;
-  overflow: hidden;
   width: 100%;
-  flex: 1;
 }
 
-.tictactoe-page__container {
+.tictactoe__content {
   display: flex;
   gap: var(--space-xl);
   align-items: flex-start;
   max-width: var(--container-max-width);
   width: 100%;
   padding: var(--space-3xl) var(--space-md);
-  box-sizing: border-box;
 }
 
-.tictactoe-page__game-container {
+.tictactoe__game-card {
   flex: 1;
   background-color: var(--color-white);
   border-radius: var(--border-radius-lg);
   padding: var(--space-xl);
-  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0px 2px 4px -2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -2px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
   align-items: center;
 }
 
-.tictactoe-page__game-area {
-  display: flex;
-  gap: var(--space-xl);
-  align-items: flex-start;
+.tictactoe__game-container {
   width: 524px;
   height: 326px;
   position: relative;
+  display: flex;
+  gap: var(--space-lg);
 }
 
-.tictactoe-page__board-section {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+.tictactoe__board-section {
   width: 270px;
   height: 326px;
   position: relative;
 }
 
-.tictactoe-page__status {
-  font-family: var(--font-family-base);
+.tictactoe__status {
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
-  line-height: 40px;
   color: var(--color-primary);
+  line-height: 40px;
   text-align: center;
-  margin: 0 0 var(--space-md) 0;
-  height: 56px;
+  margin-bottom: var(--space-md);
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.tictactoe-page__history-section {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+.tictactoe__board-wrapper {
+  margin-top: var(--space-md);
+}
+
+.tictactoe__history-section {
   width: 230px;
   height: 326px;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
-.tictactoe-page__reset-button {
+.tictactoe__reset-button {
   width: 110px;
+  padding: var(--space-xs) var(--space-md);
+  background-color: var(--color-red-700);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  line-height: 16px;
+  cursor: pointer;
+  transition: opacity var(--transition-base);
   margin-bottom: var(--space-md);
 }
 
-.tictactoe-page__history-title {
-  font-family: var(--font-family-base);
+.tictactoe__reset-button:hover {
+  opacity: 0.9;
+}
+
+.tictactoe__history-title {
   font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-bold);
-  line-height: 32px;
   color: var(--color-primary);
-  margin: 0 0 var(--space-sm) 0;
+  line-height: 32px;
+  margin-bottom: var(--space-sm);
 }
 
-.tictactoe-page__history-moves {
-  display: grid;
-  grid-template-columns: repeat(2, 110px);
-  grid-auto-rows: max-content;
-  gap: var(--space-sm);
+.tictactoe__history-list {
   height: 192px;
-  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 110px 110px;
+  gap: var(--space-sm);
+  align-content: start;
 }
 
-.tictactoe-page__move-button {
+.tictactoe__history-button {
   width: 110px;
   padding: var(--space-sm) var(--space-xs);
+  background-color: var(--color-blue-500);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  line-height: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: opacity var(--transition-base);
 }
+
+.tictactoe__history-button:hover {
+  opacity: 0.9;
+}
+
+.tictactoe__history-button--empty {
+  background-color: transparent;
+  cursor: default;
+}
+
+.tictactoe__history-button--empty:hover {
+  opacity: 1;
+}
+

@@ -1,33 +1,24 @@
-import { cx } from "../../utils/cx";
 import styles from "./Input.module.css";
+import { cx } from "../../utils/cx";
 
 interface IInput extends React.InputHTMLAttributes<HTMLInputElement> {
-  error?: string;
-  disabled?: boolean;
+  error?: boolean;
 }
 
-function Input({
-  error,
-  disabled = false,
-  className = "",
-  ...props
-}: IInput) {
-  const hasError = Boolean(error);
+function Input({ error = false, className = "", disabled = false, ...props }: IInput) {
+  const inputClasses = cx(
+    styles.input,
+    error && styles["input--error"],
+    disabled && styles["input--disabled"],
+    className
+  );
 
   return (
-    <div className={cx(styles.input, className)}>
-      <input
-        className={cx(
-          styles.input__field,
-          hasError && styles["input__field--error"],
-          disabled && styles["input__field--disabled"]
-        )}
-        disabled={disabled}
-        {...props}
-      />
-      {error && <p className={styles.input__error}>{error}</p>}
+    <div className={inputClasses}>
+      <input className={styles.input__field} disabled={disabled} {...props} />
     </div>
   );
 }
 
 export { Input };
+

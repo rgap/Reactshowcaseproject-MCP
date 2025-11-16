@@ -1,10 +1,9 @@
-export { Header } from "./Header";
-export { LanguagePicker } from "./LanguagePicker";
-export { ComponentCard } from "./ComponentCard";
-export { FeatureTag } from "./FeatureTag";
-export { Board } from "./Board";
-export { Square } from "./Square";
 export { Button } from "./Button";
+export { Tag } from "./Tag";
+export { ProjectCard } from "./ProjectCard";
+export { LanguagePicker } from "./LanguagePicker";
+export { Square } from "./Square";
+export { Board } from "./Board";
+export { Breadcrumb } from "./Breadcrumb";
+export { TypeBadge } from "./TypeBadge";
 export { Input } from "./Input";
-export { PokemonType } from "./PokemonType";
-export { PokemonCard } from "./PokemonCard";

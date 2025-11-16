@@ -1,2 +1,0 @@
-export { FeatureTag } from "./FeatureTag";
-

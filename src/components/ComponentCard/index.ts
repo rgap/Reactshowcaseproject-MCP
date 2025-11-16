@@ -1,2 +1,0 @@
-export { ComponentCard } from "./ComponentCard";
-

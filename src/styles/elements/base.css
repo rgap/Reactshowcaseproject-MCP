@@ -2,10 +2,9 @@ body {
   font-family: var(--font-family-base);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-normal);
-  line-height: var(--line-height-normal);
   color: var(--color-primary);
   background-color: var(--color-gray-50);
-  min-height: 100vh;
+  line-height: var(--line-height-normal);
 }
 
 h1,
@@ -21,27 +20,43 @@ h6 {
 
 h1 {
   font-size: var(--font-size-3xl);
+  line-height: 2.5rem;
 }
 
 h2 {
   font-size: var(--font-size-2xl);
+  line-height: 2rem;
 }
 
 h3 {
   font-size: var(--font-size-xl);
 }
 
-p {
-  font-weight: var(--font-weight-normal);
+a {
+  color: var(--color-primary);
+  transition: opacity var(--transition-base);
+}
+
+a:hover {
+  opacity: 0.8;
 }
 
 button {
-  cursor: pointer;
   transition: all var(--transition-base);
 }
 
-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
+input,
+textarea,
+select {
+  color: var(--color-primary);
+  border: var(--border-width) solid var(--color-gray-200);
+  border-radius: var(--border-radius-md);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-primary);
 }
 

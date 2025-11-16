@@ -1,50 +1,36 @@
-import { Button } from "../Button";
-import { useI18n } from "../../hooks/useI18n";
-import { LANGUAGE, LanguageType } from "./LanguagePicker.constants";
-import { cx } from "../../utils/cx";
+import { useContext } from "react";
+import { I18nContext } from "../../contexts";
 import styles from "./LanguagePicker.module.css";
+import { cx } from "../../utils/cx";
+
+import enFlag from "../../assets/en-flag.svg";
+import esFlag from "../../assets/es-flag.svg";
 
 function LanguagePicker() {
-  const { language, setLanguage } = useI18n();
-
-  const handleLanguageChange = (lang: LanguageType) => {
-    setLanguage(lang);
-  };
+  const { language, setLanguage } = useContext(I18nContext);
 
   return (
     <div className={styles["language-picker"]}>
-      <Button
-        type="button"
-        onClick={() => handleLanguageChange(LANGUAGE.EN)}
+      <button
         className={cx(
           styles["language-picker__button"],
-          styles["language-picker__button--en"],
-          language === LANGUAGE.EN && styles["language-picker__button--active"]
+          language === "en" && styles["language-picker__button--active"]
         )}
-        aria-label="Switch to English"
+        onClick={() => setLanguage("en")}
+        aria-label="English"
       >
-        <img
-          src="/assets/en-flag.png"
-          alt="English"
-          className={styles["language-picker__flag"]}
-        />
-      </Button>
-      <Button
-        type="button"
-        onClick={() => handleLanguageChange(LANGUAGE.ES)}
+        <img src={enFlag} alt="English" className={styles["language-picker__flag"]} />
+      </button>
+      <button
         className={cx(
           styles["language-picker__button"],
-          styles["language-picker__button--es"],
-          language === LANGUAGE.ES && styles["language-picker__button--active"]
+          language === "es" && styles["language-picker__button--active"]
         )}
-        aria-label="Cambiar a Español"
+        onClick={() => setLanguage("es")}
+        aria-label="Español"
       >
-        <img
-          src="/assets/es-flag.png"
-          alt="Español"
-          className={styles["language-picker__flag"]}
-        />
-      </Button>
+        <img src={esFlag} alt="Español" className={styles["language-picker__flag"]} />
+      </button>
     </div>
   );
 }

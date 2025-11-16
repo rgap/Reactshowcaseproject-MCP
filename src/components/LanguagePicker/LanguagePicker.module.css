@@ -1,38 +1,48 @@
+/* Block */
 .language-picker {
-  display: inline-grid;
+  display: grid;
   grid-template-columns: max-content;
   grid-template-rows: max-content;
+  gap: 0;
   position: relative;
 }
 
+/* Elements */
 .language-picker__button {
   grid-area: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 40px;
   height: 40px;
-  padding: 0;
-  border-radius: var(--border-radius-xl);
+  border-radius: 20px;
   border: none;
-  background: transparent;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all var(--transition-base);
 }
 
 .language-picker__button--active {
-  border: var(--border-width-thick) solid var(--color-blue-500);
+  border: var(--border-width-2) solid var(--color-blue-400);
+  background-color: transparent;
 }
 
-.language-picker__button--en {
-  margin-left: 0;
-  margin-top: 0;
-}
-
-.language-picker__button--es {
-  margin-left: 44px;
-  margin-top: 0;
+.language-picker__button:hover {
+  opacity: 0.8;
 }
 
 .language-picker__flag {
   width: 24px;
   height: 24px;
-  object-fit: cover;
   border-radius: 50%;
+  object-fit: cover;
+}
+
+.language-picker__button:first-child {
+  margin-left: 0;
+}
+
+.language-picker__button:nth-child(2) {
+  margin-left: 44px;
 }
 
