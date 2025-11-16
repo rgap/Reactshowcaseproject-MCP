@@ -1,0 +1,82 @@
+/* Block */
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-bold);
+  border: none;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: opacity var(--transition-base);
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+.button:active {
+  opacity: 0.8;
+}
+
+/* Modifiers - Intents */
+.button--primary {
+  background-color: var(--color-blue-400);
+  color: var(--color-white);
+}
+
+.button--secondary {
+  background-color: transparent;
+  border: var(--border-width) solid var(--color-gray-300);
+  color: var(--color-primary);
+}
+
+.button--danger {
+  background-color: var(--color-red-700);
+  color: var(--color-white);
+}
+
+/* Modifiers - Sizes */
+.button--small {
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--font-size-sm);
+  line-height: 14px;
+}
+
+.button--medium {
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-base);
+  line-height: 16px;
+}
+
+.button--large {
+  padding: var(--space-md) var(--space-lg);
+  font-size: var(--font-size-lg);
+  line-height: 24px;
+}
+
+/* Modifiers - States */
+.button--disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.button--full-width {
+  width: 100%;
+}
+
+/* Elements */
+.button__icon {
+  margin-right: var(--space-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button__text {
+  flex: 1;
+  text-align: center;
+}

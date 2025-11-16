@@ -1,0 +1,2 @@
+export { PokeCollectionPage } from "./PokeCollectionPage";
+

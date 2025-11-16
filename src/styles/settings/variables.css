@@ -1,54 +1,70 @@
 :root {
-  /* Colors - from Figma design tokens */
+  /* Colors - From Figma design */
   --color-primary: #0f172a;
-  --color-secondary: #64748b;
+  --color-secondary: #71717a;
   --color-white: #ffffff;
   --color-black: #000000;
   --color-gray-50: #f8fafc;
-  --color-gray-100: #f1f5f9;
-  --color-gray-200: #e2e8f0;
+  --color-gray-100: #f4f4f5;
+  --color-gray-200: #e4e4e7;
   --color-gray-300: #cbd5e1;
-  --color-slate-300: #cbd5e1;
-  --color-slate-900: #0f172a;
+  --color-gray-500: #64748b;
+  --color-error: #ef4444;
+  --color-success: #22c55e;
+
+  /* Design specific colors */
   --color-blue-50: #eff4ff;
   --color-blue-100: #dbe6fe;
+  --color-blue-400: #3b76f6;
   --color-blue-500: #6090fa;
-  --color-blue-600: #3b76f6;
-  --color-blue-700: #1d58d8;
-  --color-error: #ef4444;
-  --color-error-dark: #b91c1c;
-  --color-success: #22c55e;
+  --color-blue-600: #1d58d8;
+
+  /* Game colors */
   --color-green-600: #16a34a;
+  --color-red-700: #b91c1c;
 
   /* Spacing */
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
-  --space-2xl: 3rem;
-  --space-4xl: 4rem;
+  --space-xs: 0.25rem; /* 4px */
+  --space-sm: 0.5rem; /* 8px */
+  --space-md: 1rem; /* 16px */
+  --space-lg: 1.5rem; /* 24px */
+  --space-xl: 2rem; /* 32px */
+  --space-2xl: 3rem; /* 48px */
+  --space-3xl: 4rem; /* 64px */
 
   /* Typography */
   --font-family-base: "Nunito", system-ui, -apple-system, sans-serif;
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  --font-size-3xl: 2.25rem;
+  --font-family-mono: "Rubik Mono One", monospace;
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-lg: 1.125rem; /* 18px */
+  --font-size-xl: 1.25rem; /* 20px */
+  --font-size-2xl: 1.5rem; /* 24px */
+  --font-size-3xl: 2.25rem; /* 36px */
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-bold: 700;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 2;
 
   /* Layout */
-  --border-radius-sm: 0.25rem;
-  --border-radius-md: 0.5rem;
-  --border-radius-lg: 1rem;
-  --border-radius-xl: 1.25rem;
+  --border-radius-sm: 0.25rem; /* 4px */
+  --border-radius-md: 0.5rem; /* 8px */
+  --border-radius-lg: 1rem; /* 16px */
+  --border-radius-xl: 1.25rem; /* 20px */
   --border-radius-full: 9999px;
-  --max-width-container: 1280px;
+
+  /* Container */
+  --container-max-width: 1280px;
+
+  /* Header */
+  --header-height: 64px;
+
+  /* Card */
+  --card-width: 320px;
+  --card-image-height: 220px;
 
   /* Transitions */
   --transition-fast: 150ms ease;
@@ -59,5 +75,8 @@
   --z-dropdown: 100;
   --z-modal: 200;
   --z-tooltip: 300;
-}
 
+  /* Borders */
+  --border-width: 1px;
+  --border-width-thick: 2px;
+}

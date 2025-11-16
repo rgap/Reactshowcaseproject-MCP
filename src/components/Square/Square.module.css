@@ -5,29 +5,33 @@
   justify-content: center;
   width: 90px;
   height: 90px;
-  border: 1px solid var(--color-slate-300);
+  border: var(--border-width) solid var(--color-gray-300);
   background-color: var(--color-white);
   cursor: pointer;
-  transition: background-color var(--transition-fast);
+  transition: background-color var(--transition-base);
 }
 
-.square:hover:not(.square--disabled) {
-  background-color: var(--color-gray-100);
+.square:hover {
+  background-color: var(--color-gray-50);
 }
 
 .square--disabled {
   cursor: not-allowed;
 }
 
-.square__text {
-  font-family: "Rubik Mono One", monospace;
-  font-size: 48px;
-  line-height: 48px;
-  color: var(--color-slate-900);
-  font-style: normal;
+.square--disabled:hover {
+  background-color: var(--color-white);
 }
 
-.square__text--winning {
+.square__value {
+  font-family: var(--font-family-mono);
+  font-size: 48px;
+  line-height: 48px;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.square__value--winning {
   color: var(--color-green-600);
 }
 

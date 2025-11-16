@@ -3,9 +3,8 @@
   align-items: center;
   padding: var(--space-xs) var(--space-sm);
   background-color: var(--color-blue-50);
-  border: 1px solid var(--color-blue-100);
+  border: var(--border-width) solid var(--color-blue-100);
   border-radius: 11px;
-  box-sizing: border-box;
 }
 
 .feature-tag__text {
@@ -13,7 +12,8 @@
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-normal);
   line-height: 14px;
-  color: var(--color-slate-900);
+  color: var(--color-primary);
   white-space: nowrap;
+  margin: 0;
 }
 

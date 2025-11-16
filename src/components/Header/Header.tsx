@@ -3,19 +3,20 @@ import { LanguagePicker } from "../LanguagePicker";
 import styles from "./Header.module.css";
 
 interface IHeader {
-  badge?: string;
+  showBadge?: boolean;
+  badgeText?: string;
 }
 
-function Header({ badge }: IHeader) {
+function Header({ showBadge = false, badgeText }: IHeader) {
   const { t } = useI18n();
 
   return (
     <header className={styles.header}>
       <div className={styles.header__container}>
-        <h1 className={styles.header__title}>{t("app-title")}</h1>
-        {badge && (
+        <h1 className={styles.header__title}>{t("header-title")}</h1>
+        {showBadge && badgeText && (
           <div className={styles.header__badge}>
-            <p className={styles["header__badge-text"]}>{badge}</p>
+            <p className={styles["header__badge-text"]}>{badgeText}</p>
           </div>
         )}
         <LanguagePicker />

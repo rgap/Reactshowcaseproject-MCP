@@ -1,17 +1,16 @@
-import { createContext, useState, ReactNode } from "react";
+import { ReactNode, createContext, useState } from "react";
 import en from "../locales/en.json";
 import es from "../locales/es.json";
 
 type Language = "en" | "es";
 
 interface Locales {
-  en: typeof en;
-  es: typeof es;
+  [key: string]: { [key: string]: string };
 }
 
-interface I18nContextType {
+interface II18nContext {
   language: Language;
-  setLanguage: (lang: Language) => void;
+  setLanguage: (language: Language) => void;
   t: (key: string) => string;
 }
 
@@ -20,23 +19,18 @@ const locales: Locales = {
   es,
 };
 
-export const I18nContext = createContext<I18nContextType | undefined>(undefined);
+export const I18nContext = createContext<II18nContext | undefined>(undefined);
 
-interface I18nProviderProps {
+interface II18nProvider {
   children: ReactNode;
 }
 
-export function I18nProvider({ children }: I18nProviderProps) {
+export function I18nProvider({ children }: II18nProvider) {
   const [language, setLanguage] = useState<Language>("en");
 
   const t = (key: string): string => {
-    return locales[language][key as keyof typeof en] || key;
+    return locales[language][key] || key;
   };
 
-  return (
-    <I18nContext.Provider value={{ language, setLanguage, t }}>
-      {children}
-    </I18nContext.Provider>
-  );
+  return <I18nContext.Provider value={{ language, setLanguage, t }}>{children}</I18nContext.Provider>;
 }
-

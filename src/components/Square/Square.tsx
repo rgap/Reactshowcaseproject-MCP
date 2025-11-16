@@ -10,26 +10,31 @@ interface ISquare {
 }
 
 function Square({ value, onClick, isWinning = false, disabled = false }: ISquare) {
+  const handleClick = () => {
+    if (!disabled && !value) {
+      onClick();
+    }
+  };
+
   return (
-    <button
+    <div
       className={cx(
         styles.square,
-        disabled && styles["square--disabled"]
+        (disabled || value) && styles["square--disabled"]
       )}
-      onClick={onClick}
-      disabled={disabled}
+      onClick={handleClick}
     >
       {value && (
         <p
           className={cx(
-            styles.square__text,
-            isWinning && styles["square__text--winning"]
+            styles.square__value,
+            isWinning && styles["square__value--winning"]
           )}
         >
           {value}
         </p>
       )}
-    </button>
+    </div>
   );
 }
 

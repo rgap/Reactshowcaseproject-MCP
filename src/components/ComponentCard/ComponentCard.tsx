@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { FeatureTag } from "../FeatureTag";
 import styles from "./ComponentCard.module.css";
 
@@ -6,33 +5,31 @@ interface IComponentCard {
   title: string;
   image: string;
   features: string[];
-  link?: string;
+  onClick?: () => void;
 }
 
-function ComponentCard({ title, image, features, link }: IComponentCard) {
-  const content = (
-    <>
-      <img src={image} alt={title} className={styles["component-card__image"]} />
+function ComponentCard({ title, image, features, onClick }: IComponentCard) {
+  const handleClick = () => {
+    onClick?.();
+  };
+
+  return (
+    <div className={styles["component-card"]} onClick={handleClick}>
+      <img
+        src={image}
+        alt={title}
+        className={styles["component-card__image"]}
+      />
       <div className={styles["component-card__content"]}>
-        <h3 className={styles["component-card__title"]}>{title}</h3>
-        <div className={styles["component-card__features"]}>
-          {features.map((feature) => (
-            <FeatureTag key={feature}>{feature}</FeatureTag>
+        <h2 className={styles["component-card__title"]}>{title}</h2>
+        <div className={styles["component-card__tags"]}>
+          {features.map((feature, index) => (
+            <FeatureTag key={index}>{feature}</FeatureTag>
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
-
-  if (link) {
-    return (
-      <Link to={link} className={styles["component-card"]}>
-        {content}
-      </Link>
-    );
-  }
-
-  return <div className={styles["component-card"]}>{content}</div>;
 }
 
 export { ComponentCard };

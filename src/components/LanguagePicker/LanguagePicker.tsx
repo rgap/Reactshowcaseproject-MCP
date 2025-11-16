@@ -1,19 +1,26 @@
+import { Button } from "../Button";
 import { useI18n } from "../../hooks/useI18n";
-import { LANGUAGE } from "./LanguagePicker.constants";
+import { LANGUAGE, LanguageType } from "./LanguagePicker.constants";
 import { cx } from "../../utils/cx";
 import styles from "./LanguagePicker.module.css";
 
 function LanguagePicker() {
   const { language, setLanguage } = useI18n();
 
+  const handleLanguageChange = (lang: LanguageType) => {
+    setLanguage(lang);
+  };
+
   return (
     <div className={styles["language-picker"]}>
-      <button
+      <Button
+        type="button"
+        onClick={() => handleLanguageChange(LANGUAGE.EN)}
         className={cx(
           styles["language-picker__button"],
+          styles["language-picker__button--en"],
           language === LANGUAGE.EN && styles["language-picker__button--active"]
         )}
-        onClick={() => setLanguage(LANGUAGE.EN)}
         aria-label="Switch to English"
       >
         <img
@@ -21,13 +28,15 @@ function LanguagePicker() {
           alt="English"
           className={styles["language-picker__flag"]}
         />
-      </button>
-      <button
+      </Button>
+      <Button
+        type="button"
+        onClick={() => handleLanguageChange(LANGUAGE.ES)}
         className={cx(
           styles["language-picker__button"],
+          styles["language-picker__button--es"],
           language === LANGUAGE.ES && styles["language-picker__button--active"]
         )}
-        onClick={() => setLanguage(LANGUAGE.ES)}
         aria-label="Cambiar a Español"
       >
         <img
@@ -35,7 +44,7 @@ function LanguagePicker() {
           alt="Español"
           className={styles["language-picker__flag"]}
         />
-      </button>
+      </Button>
     </div>
   );
 }

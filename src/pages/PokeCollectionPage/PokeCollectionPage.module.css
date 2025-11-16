@@ -1,0 +1,139 @@
+/* Login Screen */
+.poke-collection-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--space-xl);
+  background-color: var(--color-gray-50);
+}
+
+.poke-collection-login__container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  align-items: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.poke-collection-login__title {
+  font-family: var(--font-family-mono);
+  font-size: 48px;
+  font-weight: var(--font-weight-normal);
+  line-height: 56px;
+  color: var(--color-blue-400);
+  text-align: center;
+  margin: 0;
+}
+
+.poke-collection-login__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+}
+
+/* Main Screen */
+.poke-collection {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-gray-50);
+}
+
+.poke-collection__main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+  padding: var(--space-2xl);
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.poke-collection__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  width: 100%;
+}
+
+.poke-collection__title {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 32px;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.poke-collection__search-form {
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+  width: 100%;
+}
+
+.poke-collection__search-input {
+  flex: 1;
+}
+
+.poke-collection__pokemon-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  width: 100%;
+}
+
+.poke-collection__message {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-gray-500);
+  text-align: center;
+  margin: 0;
+}
+
+.poke-collection__favorites {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  width: 100%;
+}
+
+.poke-collection__favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--space-md);
+  width: 100%;
+}
+
+.poke-collection__favorites-empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  width: 100%;
+}
+
+.poke-collection__exit-button {
+  align-self: flex-start;
+}
+
+@media (max-width: 768px) {
+  .poke-collection__main {
+    padding: var(--space-lg);
+  }
+
+  .poke-collection__search-form {
+    flex-direction: column;
+  }
+
+  .poke-collection-login__title {
+    font-size: 36px;
+    line-height: 44px;
+  }
+}

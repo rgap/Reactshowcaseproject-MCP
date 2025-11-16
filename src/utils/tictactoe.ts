@@ -1,12 +1,12 @@
 export type SquareValue = "X" | "O" | null;
 export type Board = SquareValue[];
 
-export interface WinnerInfo {
+interface WinnerResult {
   winner: SquareValue;
-  line: number[];
+  line: number[] | null;
 }
 
-export function calculateWinner(squares: Board): WinnerInfo | null {
+export function calculateWinner(squares: Board): WinnerResult {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -18,17 +18,14 @@ export function calculateWinner(squares: Board): WinnerInfo | null {
     [2, 4, 6],
   ];
 
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
+  for (const line of lines) {
+    const [a, b, c] = line;
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return {
-        winner: squares[a],
-        line: lines[i],
-      };
+      return { winner: squares[a], line };
     }
   }
 
-  return null;
+  return { winner: null, line: null };
 }
 
 export function isBoardFull(squares: Board): boolean {

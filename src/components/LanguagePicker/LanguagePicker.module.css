@@ -1,5 +1,5 @@
 .language-picker {
-  display: grid;
+  display: inline-grid;
   grid-template-columns: max-content;
   grid-template-rows: max-content;
   position: relative;
@@ -7,32 +7,26 @@
 
 .language-picker__button {
   grid-area: 1 / 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 40px;
   height: 40px;
-  border-radius: var(--border-radius-full);
-  border: 2px solid transparent;
+  padding: 0;
+  border-radius: var(--border-radius-xl);
+  border: none;
   background: transparent;
-  transition: border-color var(--transition-base);
-  cursor: pointer;
-}
-
-.language-picker__button:hover {
-  border-color: var(--color-blue-500);
 }
 
 .language-picker__button--active {
-  border-color: var(--color-blue-500);
+  border: var(--border-width-thick) solid var(--color-blue-500);
 }
 
-.language-picker__button:first-child {
+.language-picker__button--en {
   margin-left: 0;
+  margin-top: 0;
 }
 
-.language-picker__button:nth-child(2) {
+.language-picker__button--es {
   margin-left: 44px;
+  margin-top: 0;
 }
 
 .language-picker__flag {

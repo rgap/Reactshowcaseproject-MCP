@@ -1,167 +1,140 @@
 import { useState, useEffect } from "react";
-import { useI18n } from "../../hooks/useI18n";
+import { Header } from "../../components/Header";
 import { Board } from "../../components/Board";
+import { Button, INTENT } from "../../components/Button";
+import { useI18n } from "../../hooks/useI18n";
 import {
   Board as BoardType,
   calculateWinner,
   isBoardFull,
 } from "../../utils/tictactoe";
-import { cx } from "../../utils/cx";
 import styles from "./TicTacToePage.module.css";
+
+interface GameHistory {
+  squares: BoardType;
+}
 
 const STORAGE_KEY = "tictactoe-game-state";
 
-interface GameState {
-  history: BoardType[];
-  currentMove: number;
-}
-
 function TicTacToePage() {
   const { t } = useI18n();
+  const [history, setHistory] = useState<GameHistory[]>([
+    { squares: Array(9).fill(null) },
+  ]);
+  const [currentMove, setCurrentMove] = useState(0);
+  const xIsNext = currentMove % 2 === 0;
+  const currentSquares = history[currentMove].squares;
+  const { winner, line: winningLine } = calculateWinner(currentSquares);
+  const isTied = !winner && isBoardFull(currentSquares);
 
-  // Load initial state from localStorage or use default
-  const [history, setHistory] = useState<BoardType[]>(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        const parsed: GameState = JSON.parse(saved);
-        return parsed.history;
-      }
-    } catch (error) {
-      console.error("Error loading game state:", error);
-    }
-    return [Array(9).fill(null)];
-  });
-
-  const [currentMove, setCurrentMove] = useState<number>(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        const parsed: GameState = JSON.parse(saved);
-        return parsed.currentMove;
-      }
-    } catch (error) {
-      console.error("Error loading game state:", error);
-    }
-    return 0;
-  });
-
-  // Save to localStorage whenever state changes
+  // Load game state from localStorage on mount
   useEffect(() => {
-    try {
-      const gameState: GameState = {
-        history,
-        currentMove,
-      };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(gameState));
-    } catch (error) {
-      console.error("Error saving game state:", error);
+    const savedState = localStorage.getItem(STORAGE_KEY);
+    if (savedState) {
+      try {
+        const { history: savedHistory, currentMove: savedMove } =
+          JSON.parse(savedState);
+        setHistory(savedHistory);
+        setCurrentMove(savedMove);
+      } catch (error) {
+        // If parsing fails, start with fresh game
+      }
     }
+  }, []);
+
+  // Save game state to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({ history, currentMove })
+    );
   }, [history, currentMove]);
 
-  const xIsNext = currentMove % 2 === 0;
-  const currentSquares = history[currentMove];
-  const winnerInfo = calculateWinner(currentSquares);
-  const isTied = !winnerInfo && isBoardFull(currentSquares);
-
-  function handlePlay(nextSquares: BoardType) {
-    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+  const handlePlay = (nextSquares: BoardType) => {
+    const nextHistory = [...history.slice(0, currentMove + 1), { squares: nextSquares }];
     setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1);
-  }
+  };
 
-  function jumpTo(nextMove: number) {
-    setCurrentMove(nextMove);
-  }
-
-  function handleSquareClick(i: number) {
-    if (currentSquares[i] || winnerInfo) {
+  const handleSquareClick = (index: number) => {
+    if (currentSquares[index] || winner) {
       return;
     }
     const nextSquares = currentSquares.slice();
-    nextSquares[i] = xIsNext ? "X" : "O";
+    nextSquares[index] = xIsNext ? "X" : "O";
     handlePlay(nextSquares);
-  }
+  };
 
-  function handleReset() {
-    setHistory([Array(9).fill(null)]);
+  const jumpTo = (move: number) => {
+    setCurrentMove(move);
+  };
+
+  const handleReset = () => {
+    setHistory([{ squares: Array(9).fill(null) }]);
     setCurrentMove(0);
-  }
+  };
 
-  let status: string;
-  if (winnerInfo) {
-    status = `${t("tictactoe-winner")}${winnerInfo.winner}`;
-  } else if (isTied) {
-    status = t("tictactoe-tied-game");
-  } else {
-    status = `${t("tictactoe-next-player")}${xIsNext ? "X" : "O"}`;
-  }
-
-  const moves = history.map((_, move) => {
-    const isActive = move <= currentMove;
-    const description =
-      move === 0 ? t("tictactoe-game-start") : `${t("tictactoe-move")} ${move}`;
-
-    return (
-      <button
-        key={move}
-        onClick={() => jumpTo(move)}
-        className={cx(
-          styles["tic-tac-toe-page__move-button"],
-          !isActive && styles["tic-tac-toe-page__move-button--inactive"]
-        )}
-        disabled={!isActive}
-      >
-        <p
-          className={cx(
-            styles["tic-tac-toe-page__move-text"],
-            !isActive && styles["tic-tac-toe-page__move-text--inactive"]
-          )}
-        >
-          {description}
-        </p>
-      </button>
-    );
-  });
+  const getStatus = () => {
+    if (winner) {
+      return `${t("tictactoe-winner")}${winner}`;
+    }
+    if (isTied) {
+      return t("tictactoe-tied-game");
+    }
+    return `${t("tictactoe-next-player")}${xIsNext ? "X" : "O"}`;
+  };
 
   return (
-    <div className={styles["tic-tac-toe-page"]}>
-      <div className={styles["tic-tac-toe-page__content"]}>
-        <div className={styles["tic-tac-toe-page__card"]}>
-          <div className={styles["tic-tac-toe-page__game-container"]}>
-            <div className={styles["tic-tac-toe-page__board-section"]}>
-              <p className={styles["tic-tac-toe-page__status"]}>{status}</p>
-              <Board
-                squares={currentSquares}
-                onClick={handleSquareClick}
-                winningLine={winnerInfo?.line}
-                disabled={!!winnerInfo || isTied}
-              />
-            </div>
-            <div className={styles["tic-tac-toe-page__history-section"]}>
-              <button
-                className={styles["tic-tac-toe-page__reset"]}
-                onClick={handleReset}
-              >
-                <p className={styles["tic-tac-toe-page__reset-text"]}>
-                  {t("tictactoe-reset")}
+    <div className={styles["tictactoe-page"]}>
+      <Header showBadge badgeText={t("tictactoe-title")} />
+      <main className={styles["tictactoe-page__content"]}>
+        <div className={styles["tictactoe-page__container"]}>
+          <div className={styles["tictactoe-page__game-container"]}>
+            <div className={styles["tictactoe-page__game-area"]}>
+              <div className={styles["tictactoe-page__board-section"]}>
+                <p className={styles["tictactoe-page__status"]}>
+                  {getStatus()}
                 </p>
-              </button>
-              <div className={styles["tic-tac-toe-page__history"]}>
-                <p className={styles["tic-tac-toe-page__history-title"]}>
+                <Board
+                  squares={currentSquares}
+                  winningLine={winningLine}
+                  onSquareClick={handleSquareClick}
+                  disabled={!!winner || isTied}
+                />
+              </div>
+              <div className={styles["tictactoe-page__history-section"]}>
+                <Button
+                  onClick={handleReset}
+                  intent={INTENT.DANGER}
+                  className={styles["tictactoe-page__reset-button"]}
+                >
+                  {t("tictactoe-reset")}
+                </Button>
+                <p className={styles["tictactoe-page__history-title"]}>
                   {t("tictactoe-go-to")}
                 </p>
-                <div className={styles["tic-tac-toe-page__history-moves"]}>
-                  {moves}
+                <div className={styles["tictactoe-page__history-moves"]}>
+                  {history.map((_, move) => (
+                    <Button
+                      key={move}
+                      onClick={() => jumpTo(move)}
+                      intent={INTENT.PRIMARY}
+                      className={styles["tictactoe-page__move-button"]}
+                      disabled={move > currentMove}
+                    >
+                      {move === 0
+                        ? t("tictactoe-game-start")
+                        : `${t("tictactoe-move")} ${move}`}
+                    </Button>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }
 
 export { TicTacToePage };
-

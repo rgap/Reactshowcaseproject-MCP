@@ -1,37 +1,32 @@
 .component-card {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  width: 320px;
   background-color: var(--color-white);
-  border: 1px solid var(--color-slate-300);
-  border-radius: var(--border-radius-xl);
+  border: var(--border-width) solid var(--color-gray-300);
+  border-radius: var(--border-radius-lg);
   overflow: hidden;
-  text-decoration: none;
-  color: inherit;
+  width: var(--card-width);
   transition: transform var(--transition-base), box-shadow var(--transition-base);
+  cursor: pointer;
 }
 
 .component-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .component-card__image {
-  width: 320px;
-  height: 220px;
+  width: var(--card-width);
+  height: var(--card-image-height);
   object-fit: cover;
 }
 
 .component-card__content {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: var(--space-md);
-  width: 320px;
+  align-items: center;
   padding: var(--space-md) var(--space-sm);
   box-sizing: border-box;
+  width: var(--card-width);
 }
 
 .component-card__title {
@@ -39,16 +34,17 @@
   font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-bold);
   line-height: 32px;
-  color: var(--color-slate-900);
+  color: var(--color-primary);
   white-space: nowrap;
+  margin: 0;
 }
 
-.component-card__features {
+.component-card__tags {
   display: flex;
   flex-wrap: wrap;
+  gap: var(--space-sm);
   align-items: center;
   justify-content: center;
-  gap: var(--space-sm);
   width: 100%;
 }
 

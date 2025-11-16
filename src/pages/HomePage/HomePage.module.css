@@ -1,22 +1,29 @@
 .home-page {
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100%;
-  gap: 4px;
-  overflow: hidden;
+  min-height: 100vh;
 }
 
 .home-page__content {
   display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  flex: 1;
+}
+
+.home-page__cards-container {
+  display: flex;
   flex-wrap: wrap;
+  gap: var(--space-xl);
   align-items: flex-start;
   justify-content: center;
-  gap: var(--space-xl);
+  max-width: var(--container-max-width);
   width: 100%;
-  max-width: var(--max-width-container);
-  padding: var(--space-4xl) var(--space-md);
+  padding: var(--space-3xl) var(--space-md);
   box-sizing: border-box;
-  overflow: hidden;
 }
 

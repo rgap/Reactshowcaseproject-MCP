@@ -4,20 +4,20 @@ import styles from "./Board.module.css";
 
 interface IBoard {
   squares: BoardType;
-  onClick: (i: number) => void;
-  winningLine?: number[];
+  winningLine: number[] | null;
+  onSquareClick: (index: number) => void;
   disabled?: boolean;
 }
 
-function Board({ squares, onClick, winningLine = [], disabled = false }: IBoard) {
+function Board({ squares, winningLine, onSquareClick, disabled = false }: IBoard) {
   return (
     <div className={styles.board}>
-      {squares.map((square, i) => (
+      {squares.map((square, index) => (
         <Square
-          key={i}
+          key={index}
           value={square}
-          onClick={() => onClick(i)}
-          isWinning={winningLine.includes(i)}
+          onClick={() => onSquareClick(index)}
+          isWinning={winningLine?.includes(index) || false}
           disabled={disabled}
         />
       ))}

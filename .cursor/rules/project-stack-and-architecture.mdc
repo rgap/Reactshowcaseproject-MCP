@@ -11,6 +11,8 @@ alwaysApply: true
   - **Follow the behaviors and flows defined in that file**.
   - **Do not invent new features, pages, or states** that are not in the spec or Figma.
 - If an instruction in a prompt conflicts with `docs/functional-requirements.md`, **prefer the functional requirements file**.
+- The project MUST define a shared Button component in components/Button/ following the Button pattern in this document.
+- All primary and secondary clickable actions must reuse this Button component (no ad-hoc styled <button> elements in pages or components).
 
 ## Tech Stack
 

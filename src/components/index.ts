@@ -1,7 +1,10 @@
 export { Header } from "./Header";
 export { LanguagePicker } from "./LanguagePicker";
-export { FeatureTag } from "./FeatureTag";
 export { ComponentCard } from "./ComponentCard";
+export { FeatureTag } from "./FeatureTag";
 export { Board } from "./Board";
 export { Square } from "./Square";
-
+export { Button } from "./Button";
+export { Input } from "./Input";
+export { PokemonType } from "./PokemonType";
+export { PokemonCard } from "./PokemonCard";
