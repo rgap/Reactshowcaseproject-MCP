@@ -1,44 +1,34 @@
-import { useState, useEffect, useContext, FormEvent } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Breadcrumb, Input, LanguagePicker, TypeBadge } from "../../components";
 import { I18nContext } from "../../contexts";
-import { LanguagePicker, Breadcrumb, Input, TypeBadge } from "../../components";
-import {
-  fetchPokemon,
-  fetchFavorites,
-  addToFavorites,
-  removeFromFavorites,
-} from "../../services/pokemonApi";
-import {
-  formatPokemonId,
-  formatWeight,
-  formatHeight,
-  capitalizeName,
-} from "../../utils/pokemonHelpers";
-import type { Pokemon, FavoritePokemon } from "../../types/pokemon";
+import { addToFavorites, fetchFavorites, fetchPokemon, removeFromFavorites } from "../../services/pokemonApi";
+import type { FavoritePokemon, Pokemon } from "../../types/pokemon";
+import { capitalizeName, formatHeight, formatPokemonId, formatWeight } from "../../utils/pokemonHelpers";
 import styles from "./PokeCollectionPage.module.css";
 
-import pokemonLogo from "../../assets/pokemon-logo.svg";
-import weightIcon from "../../assets/weight-icon.svg";
-import heightIcon from "../../assets/height-icon.svg";
 import addFavoriteIcon from "../../assets/add-favorite-icon.svg";
+import heightIcon from "../../assets/height-icon.svg";
+import pokemonLogo from "../../assets/poke-preview.svg";
 import removeFavoriteIcon from "../../assets/remove-favorite-icon.svg";
+import weightIcon from "../../assets/weight-icon.svg";
 
 const STORAGE_KEY = "pokecollection-username";
 
 function PokeCollectionPage() {
   const { t } = useContext(I18nContext);
-  
+
   // State
   const [username, setUsername] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginError, setLoginError] = useState("");
   const [isLoggingIn, setIsLoggingIn] = useState(false);
-  
+
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPokemon, setCurrentPokemon] = useState<Pokemon | null>(null);
   const [searchError, setSearchError] = useState("");
   const [isSearching, setIsSearching] = useState(false);
-  
+
   const [favorites, setFavorites] = useState<FavoritePokemon[]>([]);
   const [removedPokemonNames, setRemovedPokemonNames] = useState<Set<string>>(new Set());
   const [isLoadingFavorites, setIsLoadingFavorites] = useState(false);
@@ -127,13 +117,7 @@ function PokeCollectionPage() {
   function isFavorite(): FavoritePokemon | null {
     if (!currentPokemon) return null;
     // Compare by name since the API doesn't always return pokemonId
-    return (
-      favorites.find(
-        (fav) =>
-          fav.name.toLowerCase() === currentPokemon.name.toLowerCase() ||
-          fav.pokemonId === currentPokemon.id
-      ) || null
-    );
+    return favorites.find(fav => fav.name.toLowerCase() === currentPokemon.name.toLowerCase() || fav.pokemonId === currentPokemon.id) || null;
   }
 
   async function handleToggleFavorite() {
@@ -148,7 +132,7 @@ function PokeCollectionPage() {
         // So we "remove" the Pokemon optimistically on the frontend only
         const pokemonName = currentPokemon.name.toLowerCase();
         setRemovedPokemonNames(prev => new Set(prev).add(pokemonName));
-        
+
         // Remove from current favorites list immediately
         setFavorites(prev => prev.filter(fav => fav.name.toLowerCase() !== pokemonName));
       } else {
@@ -157,9 +141,9 @@ function PokeCollectionPage() {
           await addToFavorites(username, currentPokemon);
         } catch (addError) {
           // If backend fails (even with 409), we'll add optimistically anyway
-          console.log('Backend add failed, adding optimistically:', addError);
+          console.log("Backend add failed, adding optimistically:", addError);
         }
-        
+
         // Remove from "removed" set if it was previously removed
         const pokemonName = currentPokemon.name.toLowerCase();
         setRemovedPokemonNames(prev => {
@@ -167,7 +151,7 @@ function PokeCollectionPage() {
           newSet.delete(pokemonName);
           return newSet;
         });
-        
+
         // Add to favorites list optimistically (works even if backend fails)
         const newFavorite: FavoritePokemon = {
           id: currentPokemon.id,
@@ -176,7 +160,7 @@ function PokeCollectionPage() {
           imageUrl: currentPokemon.sprites.other["official-artwork"].front_default,
           types: currentPokemon.types.map(t => t.type.name),
         };
-        
+
         // Check if already in list (by name), if not add it
         setFavorites(prev => {
           const exists = prev.some(fav => fav.name.toLowerCase() === pokemonName);
@@ -185,7 +169,7 @@ function PokeCollectionPage() {
         });
       }
     } catch (error) {
-      console.error('Error toggling favorite:', error);
+      console.error("Error toggling favorite:", error);
     } finally {
       setIsTogglingFavorite(false);
     }
@@ -198,7 +182,9 @@ function PokeCollectionPage() {
         <header className={styles.poke__header}>
           <div className={styles["poke__header-container"]}>
             <h1 className={styles.poke__title}>
-              <Link to="/" className={styles.poke__link}>{t("app-title")}</Link>
+              <Link to="/" className={styles.poke__link}>
+                {t("app-title")}
+              </Link>
             </h1>
             <Breadcrumb>{t("project-pokecollection")}</Breadcrumb>
             <LanguagePicker />
@@ -207,25 +193,17 @@ function PokeCollectionPage() {
         <main className={styles.poke__main}>
           <div className={styles.poke__content}>
             <div className={styles["poke__login-card"]}>
-              <img
-                src={pokemonLogo}
-                alt="Pokemon Logo"
-                className={styles["poke__login-logo"]}
-              />
+              <img src={pokemonLogo} alt="Pokemon Logo" className={styles["poke__login-logo"]} />
               <form className={styles["poke__login-form"]} onSubmit={handleLogin}>
                 <Input
                   type="text"
                   placeholder={t("pokemon-username-placeholder")}
                   value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  onChange={e => setUsername(e.target.value)}
                   disabled={isLoggingIn}
                   error={!!loginError}
                 />
-                <button
-                  type="submit"
-                  className={styles["poke__login-button"]}
-                  disabled={isLoggingIn || !username.trim()}
-                >
+                <button type="submit" className={styles["poke__login-button"]} disabled={isLoggingIn || !username.trim()}>
                   {t("pokemon-enter")}
                 </button>
                 {loginError && <p className={styles.poke__error}>{loginError}</p>}
@@ -243,7 +221,9 @@ function PokeCollectionPage() {
       <header className={styles.poke__header}>
         <div className={styles["poke__header-container"]}>
           <h1 className={styles.poke__title}>
-            <Link to="/" className={styles.poke__link}>{t("app-title")}</Link>
+            <Link to="/" className={styles.poke__link}>
+              {t("app-title")}
+            </Link>
           </h1>
           <Breadcrumb>{t("project-pokecollection")}</Breadcrumb>
           <LanguagePicker />
@@ -258,16 +238,12 @@ function PokeCollectionPage() {
                   type="text"
                   placeholder={t("pokemon-search-placeholder")}
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={e => setSearchQuery(e.target.value)}
                   disabled={isSearching}
                   className={styles["poke__search-input"]}
                   error={!!searchError}
                 />
-                <button
-                  type="submit"
-                  className={styles["poke__search-button"]}
-                  disabled={isSearching || !searchQuery.trim()}
-                >
+                <button type="submit" className={styles["poke__search-button"]} disabled={isSearching || !searchQuery.trim()}>
                   {t("pokemon-search")}
                 </button>
               </form>
@@ -275,12 +251,8 @@ function PokeCollectionPage() {
               {currentPokemon && (
                 <div className={styles["poke__pokemon-detail"]}>
                   <div>
-                    <p className={styles["poke__pokemon-name"]}>
-                      {capitalizeName(currentPokemon.name)}
-                    </p>
-                    <p className={styles["poke__pokemon-id"]}>
-                      {formatPokemonId(currentPokemon.id)}
-                    </p>
+                    <p className={styles["poke__pokemon-name"]}>{capitalizeName(currentPokemon.name)}</p>
+                    <p className={styles["poke__pokemon-id"]}>{formatPokemonId(currentPokemon.id)}</p>
                   </div>
                   <img
                     src={currentPokemon.sprites.other["official-artwork"].front_default}
@@ -296,9 +268,7 @@ function PokeCollectionPage() {
                     <div className={styles.poke__stat}>
                       <div className={styles["poke__stat-value"]}>
                         <img src={weightIcon} alt="Weight" className={styles["poke__stat-icon"]} />
-                        <span className={styles["poke__stat-text"]}>
-                          {formatWeight(currentPokemon.weight)}
-                        </span>
+                        <span className={styles["poke__stat-text"]}>{formatWeight(currentPokemon.weight)}</span>
                       </div>
                       <span className={styles["poke__stat-label"]}>{t("pokemon-weight")}</span>
                     </div>
@@ -306,9 +276,7 @@ function PokeCollectionPage() {
                     <div className={styles.poke__stat}>
                       <div className={styles["poke__stat-value"]}>
                         <img src={heightIcon} alt="Height" className={styles["poke__stat-icon"]} />
-                        <span className={styles["poke__stat-text"]}>
-                          {formatHeight(currentPokemon.height)}
-                        </span>
+                        <span className={styles["poke__stat-text"]}>{formatHeight(currentPokemon.height)}</span>
                       </div>
                       <span className={styles["poke__stat-label"]}>{t("pokemon-height")}</span>
                     </div>
@@ -317,61 +285,33 @@ function PokeCollectionPage() {
               )}
 
               {currentPokemon && (
-                <button
-                  className={styles["poke__favorite-button"]}
-                  onClick={handleToggleFavorite}
-                  disabled={isTogglingFavorite}
-                >
-              <img
-                src={isFavorite() ? removeFavoriteIcon : addFavoriteIcon}
-                alt=""
-                className={styles["poke__favorite-icon"]}
-              />
-                  {isFavorite()
-                    ? t("pokemon-remove-from-favorites")
-                    : t("pokemon-add-to-favorites")}
+                <button className={styles["poke__favorite-button"]} onClick={handleToggleFavorite} disabled={isTogglingFavorite}>
+                  <img src={isFavorite() ? removeFavoriteIcon : addFavoriteIcon} alt="" className={styles["poke__favorite-icon"]} />
+                  {isFavorite() ? t("pokemon-remove-from-favorites") : t("pokemon-add-to-favorites")}
                 </button>
               )}
 
-              {searchError && !currentPokemon && (
-                <p className={styles.poke__error}>{searchError}</p>
-              )}
+              {searchError && !currentPokemon && <p className={styles.poke__error}>{searchError}</p>}
             </div>
 
             <div className={styles["poke__favorites-sidebar"]}>
               <div className={styles["poke__favorites-header"]}>
-                <h2 className={styles["poke__favorites-title"]}>
-                  {t("pokemon-favorites")}
-                </h2>
+                <h2 className={styles["poke__favorites-title"]}>{t("pokemon-favorites")}</h2>
                 <button className={styles["poke__exit-button"]} onClick={handleExit}>
                   {t("pokemon-exit")}
                 </button>
               </div>
               <div className={styles["poke__favorites-list"]}>
                 {favorites.length === 0 ? (
-                  <div className={styles["poke__empty-state"]}>
-                    {t("pokemon-empty-favorites")}
-                  </div>
+                  <div className={styles["poke__empty-state"]}>{t("pokemon-empty-favorites")}</div>
                 ) : (
-                  favorites.map((favorite) => (
-                    <div
-                      key={favorite.id}
-                      className={styles["poke__favorite-card"]}
-                      onClick={() => handleFavoriteClick(favorite)}
-                    >
+                  favorites.map(favorite => (
+                    <div key={favorite.id} className={styles["poke__favorite-card"]} onClick={() => handleFavoriteClick(favorite)}>
                       <div>
-                        <p className={styles["poke__favorite-name"]}>
-                          {capitalizeName(favorite.name)}
-                        </p>
-                        <p className={styles["poke__favorite-id"]}>
-                          {formatPokemonId(favorite.pokemonId)}
-                        </p>
+                        <p className={styles["poke__favorite-name"]}>{capitalizeName(favorite.name)}</p>
+                        <p className={styles["poke__favorite-id"]}>{formatPokemonId(favorite.pokemonId)}</p>
                       </div>
-                      <img
-                        src={favorite.imageUrl}
-                        alt={favorite.name}
-                        className={styles["poke__favorite-image"]}
-                      />
+                      <img src={favorite.imageUrl} alt={favorite.name} className={styles["poke__favorite-image"]} />
                       <div className={styles["poke__pokemon-types"]}>
                         {favorite.types.map((type, index) => (
                           <TypeBadge key={index} type={type} />
