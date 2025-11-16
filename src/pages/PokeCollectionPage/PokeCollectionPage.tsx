@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext, FormEvent } from "react";
+import { Link } from "react-router-dom";
 import { I18nContext } from "../../contexts";
 import { LanguagePicker, Breadcrumb, Input, TypeBadge } from "../../components";
 import {
@@ -196,7 +197,9 @@ function PokeCollectionPage() {
       <div className={styles.poke}>
         <header className={styles.poke__header}>
           <div className={styles["poke__header-container"]}>
-            <h1 className={styles.poke__title}>{t("app-title")}</h1>
+            <h1 className={styles.poke__title}>
+              <Link to="/" className={styles.poke__link}>{t("app-title")}</Link>
+            </h1>
             <Breadcrumb>{t("project-pokecollection")}</Breadcrumb>
             <LanguagePicker />
           </div>
@@ -239,7 +242,9 @@ function PokeCollectionPage() {
     <div className={styles.poke}>
       <header className={styles.poke__header}>
         <div className={styles["poke__header-container"]}>
-          <h1 className={styles.poke__title}>{t("app-title")}</h1>
+          <h1 className={styles.poke__title}>
+            <Link to="/" className={styles.poke__link}>{t("app-title")}</Link>
+          </h1>
           <Breadcrumb>{t("project-pokecollection")}</Breadcrumb>
           <LanguagePicker />
         </div>

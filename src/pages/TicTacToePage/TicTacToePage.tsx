@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { I18nContext } from "../../contexts";
 import { Board, LanguagePicker, Breadcrumb } from "../../components";
 import { useTicTacToe } from "../../hooks/useTicTacToe";
@@ -78,7 +79,9 @@ function TicTacToePage() {
     <div className={styles.tictactoe}>
       <header className={styles.tictactoe__header}>
         <div className={styles["tictactoe__header-container"]}>
-          <h1 className={styles.tictactoe__title}>{t("app-title")}</h1>
+          <h1 className={styles.tictactoe__title}>
+            <Link to="/" className={styles.tictactoe__link}>{t("app-title")}</Link>
+          </h1>
           <Breadcrumb>{t("project-tictactoe")}</Breadcrumb>
           <LanguagePicker />
         </div>

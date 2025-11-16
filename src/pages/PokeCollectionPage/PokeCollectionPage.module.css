@@ -35,6 +35,17 @@
   margin: 0;
 }
 
+.poke__link {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity var(--transition-base);
+}
+
+.poke__link:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
 /* Main Content */
 .poke__main {
   flex: 1;
